@@ -1,0 +1,5 @@
+scr.ip,dst.ip,service,packages,cooldown,dst.port
+local,127.0.0.2,tcp,20,5,442
+local,127.1.0.2,udp,15,3,100
+local,127.2.0.2,icmp,45,7,
+local,127.3.0.2,test,22,6,80
