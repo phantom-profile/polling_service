@@ -60,6 +60,9 @@ class Loggable:
         self.logger.exception(msg=message)
 
     def logged_info(self) -> list[str]:
+        if not self.logger:
+            self.__init_logger()
+
         return self.storage.get_all()
 
     @property
