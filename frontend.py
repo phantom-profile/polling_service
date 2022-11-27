@@ -40,10 +40,10 @@ class MainWindow(Tk):
         self.add('stop', self.button_factory(text="Stop Polling", bg="red", command=self.service_stop))
         self.add('clear', self.button_factory(text='Clear journal', bg='red', command=self.clear_journal))
 
-    def get_object(self, id: str | int):
+    def get_object(self, id: str):
         return self.objects[id]
 
-    def add(self, id: str | int, element):
+    def add(self, id: str, element):
         self.objects[id] = element
 
     def button_factory(self, text: str, command: Callable, bg: str = 'grey') -> Button:
