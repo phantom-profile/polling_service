@@ -29,7 +29,7 @@ class MemoryHandler(StreamHandler):
 
 
 class Loggable:
-    __logger: Logger | None = None
+    __logger: Logger= None
     LOG_LEVEL = INFO
 
     def __init_logger(self):
