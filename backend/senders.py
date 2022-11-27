@@ -38,7 +38,7 @@ class SendersFactory(Loggable):
     def create_senders_from_csv(self, raw_data: Iterable):
         self.__products.clear()
 
-        for index, line in enumerate(raw_data, start=1):
+        for index, line in enumerate(raw_data, start=2):
             try:
                 protocol: str = line[self.PROTOCOL].upper()
             except KeyError:

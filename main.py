@@ -16,26 +16,27 @@
 # python 3.10 + venv
 #
 import os
+import sys
 
-from frontend import MainWindow
+from console_main_window import MainWindow
 from backend.backend import BackendService, PollingService
 
 
 class Application:
-    def __init__(self, backend_service: BackendService):
-        self.interface = MainWindow(
-            'TCP/UDP/ICMP polling service',
-            geometry='850x400',
-            backend_service=backend_service,
-            welcome_message='Download CSV file and start polling. See "CSV format Hint" to check CSV rules.'
-        )
+    def __init__(self, backend_service: BackendService, filename: str):
+        self.interface = MainWindow(backend_service=backend_service, filename=filename)
 
     def launch(self):
         self.interface.mainloop()
 
 
 def main():
-    app = Application(backend_service=PollingService())
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+    else:
+        filename = input('Enter path to csv file\n')
+
+    app = Application(backend_service=PollingService(), filename=filename)
     app.launch()
 
 
