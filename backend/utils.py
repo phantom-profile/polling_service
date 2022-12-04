@@ -29,13 +29,14 @@ class MemoryHandler(StreamHandler):
 
 
 class Loggable:
-    __logger: Logger= None
+    __logger: Logger = None
+    __storage: MemoryStorage = None
     LOG_LEVEL = INFO
 
     def __init_logger(self):
         self.set_logger(getLogger(f"{self.__class__.__name__}Logger"))
         self.logger.setLevel(self.LOG_LEVEL)
-        self.storage = MemoryStorage()
+        self.set_storage(MemoryStorage())
         handler = MemoryHandler(self.storage)
         formatter = Formatter('%(asctime)s | %(name)s::%(levelname)s - %(message)s\n')
         handler.setFormatter(formatter)
@@ -66,11 +67,18 @@ class Loggable:
         return self.storage.get_all()
 
     @property
-    def logger(self):
-        return self.__class__.__logger
+    def storage(self):
+        return self.__class__.__storage
+
+    def set_storage(self, storage: MemoryStorage):
+        self.__class__.__storage = storage
 
     def set_logger(self, logger: Logger):
         self.__class__.__logger = logger
+
+    @property
+    def logger(self):
+        return self.__class__.__logger
 
 
 class CsvDownloader:
